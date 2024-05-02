@@ -1,0 +1,22 @@
+.all {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.ajout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form {
+    &__ajout {
+        display: flex;
+        flex-direction: column;
+    }
+}
+.consult_choix {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

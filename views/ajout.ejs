@@ -1,0 +1,117 @@
+<div class="ajout_voitu">
+    <h3>Nouvelle voiture</h3>
+    <form action="/ajout_voitu" method="post" class="form__ajout">
+            <div>
+                <label for="modele">Marque et Modèle :</label>
+                <select id="modele" name="modele">
+                    <% marques.forEach( (ma)=> { %>
+                            <% modeles.forEach( (mo)=> { %>
+                                <% if (mo.id_marqu == ma.id_marqu)  {%>
+                                <option value="<%= mo.id_model %>"><%= ma.marque %>&nbsp;<%= mo.modele %></option>
+                    <% }})}); %>
+                </select>
+            </div>
+            <div>
+                <label for="boite">Boite de vitesse :</label>
+                <select id="boite" name="boite">
+                    <% boites.forEach( (b)=> { %>
+                        <option value="<%= b.id_boite %>"><%= b.boite %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div>
+                <label for="carburant">Carburant :</label>
+                <select id="carburant" name="carburant">
+                    <% carburants.forEach( (c)=> { %>
+                        <option value="<%= c.id_carbu %>"><%= c.carburant %></option>
+                    <% }); %>
+                </select>
+            </div>
+            <input type="submit" value="Nouvelle Voiture">
+    </form>
+</div>
+    
+<div class="ajout_mm">
+    <h3>Marques et modèles :</h3>
+        <div>
+            <form action="/new_marqu" method="post">
+                <input type="text" id="new_marqu" name="new_marqu" placeholder="Nouvelle Marque">
+                <button type="submit">+</button>
+            </form>
+            <% marques.forEach( (ma)=> { %>
+                <div>
+                    <form action="/mod_marqu" method="post">
+                        <input type="hidden" name="id_marqu" value="<%= ma.id_marqu %>">
+                        <input type="text" id="marqu" name="marqu" value="<%= ma.marque %>" />
+                        <button type="submit" name="btn" value="mod">Modif</button>
+                        <button type="submit" name="btn" value="sup">Suppr</button>
+                    </form>
+                </div>
+            <% }); %>
+        </div>
+        <% marques.forEach( (ma)=> { %>
+            <h3><%= ma.marque %> :</h3>
+            <div>
+                <form action="/new_model" method="post">
+                    <input type="hidden" name="id_marqu" value="<%= ma.id_marqu %>">
+                    <input type="text" id="new_model" name="new_model" placeholder="Nouveau Modele">
+                    <button type="submit">+</button>
+                </form>
+            </div>
+            <% modeles.forEach( (mo)=> { %>
+                <% if (mo.id_marqu == ma.id_marqu)  {%>
+                    <div>
+                        <form action="/mod_model" method="post">
+                            <input type="hidden" name="id_model" value="<%= mo.id_model %>">
+                            <input type="hidden" name="id_marqu" value="<%= ma.id_marqu %>">
+                            <input type="text" id="model" name="model" value="<%= mo.modele %>" />
+                            <button type="submit" name="btn" value="mod">Modif</button>
+                            <button type="submit" name="btn" value="sup">Suppr</button>
+                        </form>
+                    </div>
+        <% }})}); %>
+
+</div>
+
+<div class="ajout_carbu">
+    <h3>Carburants</h3>
+    
+            <div>
+                <form action="/new_carbu" method="post">
+                    <input type="text" id="new_carbu" name="new_carbu" placeholder="Nouveau carburant">
+                    <button type="submit">+</button>
+                </form>
+            </div>
+
+            <% carburants.forEach( (c)=> { %>
+                <div>
+                    <form action="/mod_carbu" method="post">
+                        <input type="hidden" name="id" value="<%= c.id_carbu %>">
+                        <input type="text" id="carbu" name="carbu" value="<%= c.carburant %>" />
+                        <button type="submit" name="btn" value="mod">Modif</button>
+                        <button type="submit" name="btn" value="sup">Suppr</button>
+                    </form>
+                </div>
+            <% }); %>    
+</div>
+
+<div class="ajout_boite">
+    <h3>Boites de vitesse</h3>
+            <div>
+                <form action="/new_boite" method="post">
+                    <input type="text" id="new_boite" name="new_boite" placeholder="Nouvelle Boite de vitesse">
+                    <button type="submit">+</button>
+                </form>
+            </div>
+
+            <% boites.forEach( (b)=> { %>
+                <div>
+                    <form action="/mod_boite" method="post">
+                        <input type="hidden" name="id" value="<%= b.id_boite %>">
+                        <input type="text" id="boite" name="boite" value="<%= b.boite %>" />
+                        <button type="submit" name="btn" value="mod">Modif</button>
+                        <button type="submit" name="btn" value="sup">Suppr</button>
+                    </form>
+                </div>
+            <% }); %>
+</div>
